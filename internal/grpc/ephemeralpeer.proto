@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package ephemeralpeer;
+
+option go_package = "github.com/mullvad/ep/internal/grpc";
+
+service EphemeralPeer {
+  rpc RegisterPeerV1(EphemeralPeerRequestV1) returns (EphemeralPeerResponseV1) {}
+}
+
+message EphemeralPeerRequestV1 {
+  bytes wg_parent_pubkey = 1;
+  bytes wg_ephemeral_peer_pubkey = 2;
+  PostQuantumRequestV1 post_quantum = 3;
+  DaitaRequestV1 daita = 4;
+}
+
+message PostQuantumRequestV1 {
+  repeated KemPubkeyV1 kem_pubkeys = 1;
+}
+
+message KemPubkeyV1 {
+  string algorithm_name = 1;
+  bytes key_data = 2;
+}
+
+message DaitaRequestV1 {
+  bool activate_daita = 1;
+}
+
+message EphemeralPeerResponseV1 {
+  PostQuantumResponseV1 post_quantum = 1;
+}
+
+message PostQuantumResponseV1 {
+  repeated bytes ciphertexts = 1;
+}
