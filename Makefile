@@ -44,6 +44,10 @@ release-darwin-arm64:
 release-linux-amd64:
 	$(MAKE) GOOS=linux GOARCH=amd64 build
 
+.PHONY: release-linux-arm64
+release-linux-arm64:
+	$(MAKE) GOOS=linux GOARCH=arm64 build
+
 .PHONY: release-windows-amd64
 release-windows-amd64:
 	$(MAKE) GOOS=windows GOARCH=amd64 EXT=.exe build
@@ -54,4 +58,5 @@ release: \
 	release-darwin-amd64 \
 	release-darwin-arm64 \
 	release-linux-amd64 \
+	release-linux-arm64 \
 	release-windows-amd64
