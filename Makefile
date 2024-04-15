@@ -1,12 +1,16 @@
-BIN                = mullvad-upgrade-tunnel
-GO_LDFLAGS         = -buildid= -s -w -X main.VERSION=${VERSION}
 export CGO_ENABLED = 0
 export VERSION     = ${shell git describe --tags 2>/dev/null}
 
-.PHONY: mullvad-upgrade-tunnel
-mullvad-upgrade-tunnel:
+BIN        = mullvad-upgrade-tunnel
+GO_LDFLAGS = -buildid= -s -w -X main.VERSION=${VERSION}
+
+.PHONY: all
+all: ${BIN}
+
+.PHONY: ${BIN}
+${BIN}:
 	go build -a -trimpath -buildvcs=false -ldflags "${GO_LDFLAGS}" \
-		-o ${BIN} ./cmd/mullvad-upgrade-tunnel
+		-o ${BIN} ./cmd/${BIN}
 
 .PHONY: install
 install:
@@ -17,9 +21,24 @@ grpc:
 	protoc --go_out=. --go_opt=paths=source_relative \
 		--go-grpc_out=. --go-grpc_opt=paths=source_relative internal/grpc/ephemeralpeer.proto
 
+.PHONY: upgrade
+upgrade:
+	go get -u
+	go mod vendor
+	go mod tidy
+
 .PHONY: clean
 clean:
 	rm -f ${BIN}*
+
+.PHONY: fmt
+fmt:
+	go fmt ./...
+
+.PHONY: vet
+vet:
+	go vet ./...
+	staticcheck ./...
 
 .PHONY: build-container
 build-container:
