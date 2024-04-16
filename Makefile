@@ -10,7 +10,7 @@ all: ${BIN}
 .PHONY: ${BIN}
 ${BIN}:
 	go build -a -trimpath -buildvcs=false -ldflags "${GO_LDFLAGS}" \
-		-o ${BIN} ./cmd/${BIN}
+		-o ${BIN} ./cmd/mullvad-upgrade-tunnel
 
 .PHONY: install
 install:
@@ -49,7 +49,7 @@ build: build-container
 	podman run --rm -v .:/build:Z -w /build \
 		-e GOOS=${GOOS} -e GOARCH=${GOARCH} \
 		-it wgephemeralpeer \
-		make BIN=${BIN}${EXT} ${BIN} && zip ${BIN}_${VERSION}_${GOOS}_${GOARCH}.zip ${BIN}${EXT}
+		sh -c 'make BIN=${BIN}${EXT} && zip ${BIN}_${VERSION}_${GOOS}_${GOARCH}.zip ${BIN}${EXT}'
 
 .PHONY: release-darwin-amd64
 release-darwin-amd64:
