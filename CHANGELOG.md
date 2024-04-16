@@ -19,6 +19,10 @@ Line wrap the file at 100 chars.                                              Th
 * **Fixed**: for any bug fixes.
 * **Security**: in case of vulnerabilities.
 
+## [1.0.1] - 2024-04-16
+### Security
+- Update dependencies
+
 ## [1.0.0] - 2024-03-22
 ### Added
 - Core functionality with some configurability.
