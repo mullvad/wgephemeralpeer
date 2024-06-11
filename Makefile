@@ -47,9 +47,9 @@ build-container:
 .PHONY: build
 build: build-container
 	podman run --rm -v .:/build:Z -w /build \
-		-e GOOS=${GOOS} -e GOARCH=${GOARCH} \
+		-e GOOS=${GOOS} -e GOARCH=${GOARCH} -e GOARM=${GOARM} \
 		-it wgephemeralpeer \
-		sh -c 'make BIN=${BIN}${EXT} && zip ${BIN}_${VERSION}_${GOOS}_${GOARCH}.zip ${BIN}${EXT}'
+		sh -c 'ARMV=$${GOARM:+v$$GOARM};make BIN=${BIN}${EXT} && zip ${BIN}_${VERSION}_${GOOS}_${GOARCH}$$ARMV.zip ${BIN}${EXT}'
 
 .PHONY: release-darwin-amd64
 release-darwin-amd64:
@@ -67,9 +67,25 @@ release-linux-amd64:
 release-linux-arm64:
 	$(MAKE) GOOS=linux GOARCH=arm64 build
 
+.PHONY: release-linux-armv5
+release-linux-armv5:
+	$(MAKE) GOOS=linux GOARCH=arm GOARM=5 build
+
+.PHONY: release-linux-armv6
+release-linux-armv6:
+	$(MAKE) GOOS=linux GOARCH=arm GOARM=6 build
+
+.PHONY: release-linux-armv7
+release-linux-armv7:
+	$(MAKE) GOOS=linux GOARCH=arm GOARM=7 build
+
 .PHONY: release-windows-amd64
 release-windows-amd64:
 	$(MAKE) GOOS=windows GOARCH=amd64 EXT=.exe build
+
+.PHONY: release-windows-aŕm64
+release-windows-arm64:
+	$(MAKE) GOOS=windows GOARCH=arm64 EXT=.exe build
 
 .PHONY: release
 release: \
@@ -78,4 +94,8 @@ release: \
 	release-darwin-arm64 \
 	release-linux-amd64 \
 	release-linux-arm64 \
+	release-linux-armv5 \
+	release-linux-armv6 \
+	release-linux-armv7 \
 	release-windows-amd64
+	release-windows-arm64
