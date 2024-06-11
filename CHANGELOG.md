@@ -19,7 +19,7 @@ Line wrap the file at 100 chars.                                              Th
 * **Fixed**: for any bug fixes.
 * **Security**: in case of vulnerabilities.
 
-## [Unreleased]
+## [1.0.2] - 2024-06-11
 ### Added
 - Add build target for Linux ARMv5, ARMv6, ARMv6 and Windows ARM64.
 
