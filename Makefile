@@ -83,7 +83,7 @@ release-linux-armv7:
 release-windows-amd64:
 	$(MAKE) GOOS=windows GOARCH=amd64 EXT=.exe build
 
-.PHONY: release-windows-aŕm64
+.PHONY: release-windows-arm64
 release-windows-arm64:
 	$(MAKE) GOOS=windows GOARCH=arm64 EXT=.exe build
 
@@ -97,5 +97,5 @@ release: \
 	release-linux-armv5 \
 	release-linux-armv6 \
 	release-linux-armv7 \
-	release-windows-amd64
+	release-windows-amd64 \
 	release-windows-arm64
