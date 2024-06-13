@@ -42,6 +42,10 @@ vet:
 	go vet ./...
 	staticcheck ./...
 
+.PHONY: test
+test:
+	go test -v ./...
+
 .PHONY: build-container
 build-container:
 	podman build -t wgephemeralpeer .
