@@ -26,8 +26,8 @@ grpc:
 .PHONY: upgrade
 upgrade:
 	go get -u
-	go mod vendor
 	go mod tidy
+	go mod vendor
 
 .PHONY: clean
 clean:
