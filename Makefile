@@ -1,5 +1,7 @@
 export CGO_ENABLED = 0
 export VERSION     = ${shell git describe --tags 2>/dev/null}
+export SOURCE_DATE_ISO = ${shell TZ=UTC git log ${VERSION} -1 --date=iso-local --pretty=%cd}
+
 
 BIN        = mullvad-upgrade-tunnel
 GO_LDFLAGS = -buildid= -s -w -X main.VERSION=${VERSION}
@@ -47,9 +49,13 @@ build-container:
 .PHONY: build
 build: build-container
 	podman run --rm -v .:/build:Z -w /build \
-		-e GOOS=${GOOS} -e GOARCH=${GOARCH} -e GOARM=${GOARM} \
-		-it wgephemeralpeer \
-		sh -c 'ARMV=$${GOARM:+v$$GOARM};make BIN=${BIN}${EXT} && zip ${BIN}_${VERSION}_${GOOS}_${GOARCH}$$ARMV.zip ${BIN}${EXT}'
+		-e GOOS=${GOOS} -e GOARCH=${GOARCH} -e GOARM=${GOARM} -e TZ=UTC \
+		wgephemeralpeer \
+		sh -c '\
+			ARMV=$${GOARM:+v$$GOARM};make BIN=${BIN}${EXT} && \
+			touch -d "${SOURCE_DATE_ISO}" ${BIN}${EXT} && \
+			zip -X ${BIN}_${VERSION}_${GOOS}_${GOARCH}$$ARMV.zip ${BIN}${EXT}'
+
 
 .PHONY: release-darwin-amd64
 release-darwin-amd64:
