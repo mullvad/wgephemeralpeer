@@ -6,5 +6,4 @@ jobs:
   nightly:
     uses: mullvad/rsw-public/.github/workflows/go-ci.yaml@master
     with:
-      govulncheck-ignore-error: true
-      govulncheck-go: 'go1.22.4'
+      go-version: '1.22.4'

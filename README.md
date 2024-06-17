@@ -9,8 +9,9 @@ post-quantum-secure WireGuard tunnels.
 
 ## Installation instructions
 
-1. Download and compile the `mullvad-upgrade-tunnel` tool by running `make` in
-   the repository.
+1. Download the appropriate release of `mullvad-upgrade-tunnel` tool from
+   `https://github.com/mullvad/wgephemeralpeer/releases`. Alternatively, to
+   build from source, see the following section.
 2. Go to `https://mullvad.net/en/account/wireguard-config` and download a
    WireGuard configuration file.
 3. Open the configuration file and locate the `[Interface]` section. Add
@@ -39,6 +40,12 @@ You can now use `wg-quick` to start and stop your tunnel as usual by running
 When executing `wg`, you should be able to see a `preshared key: (hidden)`
 line underneath the peer section, indicating that a PSK has been successfully
 configured for your tunnel.
+
+### Build from source
+
+To build from source, run `make` in the repository. Note that the result may
+depend on the go-version you have installed. If podman is installed you can
+also use the release targets to build in a container.
 
 ### macOS
 
