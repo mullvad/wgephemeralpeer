@@ -5,6 +5,8 @@ linters:
     - govet
     - revive
     - staticcheck
+    - gosimple
+    - unused
 
 issues:
   exclude-use-default: false
