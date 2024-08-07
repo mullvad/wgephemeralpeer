@@ -1,5 +1,8 @@
 module github.com/mullvad/wgephemeralpeer
 
+// Use go 1.19 to ensure the application can be built on an OpenWrt device.
+// Bump once a newer package is available at:
+// https://openwrt.org/packages/pkgdata/golang
 go 1.19
 
 replace github.com/cloudflare/circl => github.com/mullvad/circl v0.0.0-20240104174227-83b264e1de1f
