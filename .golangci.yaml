@@ -7,6 +7,7 @@ linters:
     - staticcheck
     - gosimple
     - unused
+    - gofmt
 
 issues:
   exclude-use-default: false
