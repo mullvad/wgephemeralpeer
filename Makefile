@@ -39,16 +39,26 @@ fmt:
 
 .PHONY: vet
 vet:
-	go vet ./...
-	staticcheck ./...
+	golangci-lint run ./...
+
+.PHONY: vuln
+vuln:
+	govulncheck ./...
 
 .PHONY: test
 test:
 	go test -v ./...
 
+.PHONY: ci
+ci:
+	podman build --quiet --target test \
+		-t wgephemeralpeer-tester .
+	podman run --rm -v .:/build:Z -w /build \
+		-it wgephemeralpeer-tester make all vuln test vet
+
 .PHONY: build-container
 build-container:
-	podman build -t wgephemeralpeer .
+	podman build --target build -t wgephemeralpeer .
 
 .PHONY: build
 build: build-container
