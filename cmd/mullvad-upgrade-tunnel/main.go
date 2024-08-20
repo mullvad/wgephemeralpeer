@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"flag"
 	"fmt"
 	"os"
@@ -38,7 +39,11 @@ func main() {
 	}
 
 	if err := wgephemeralpeer.Connect(*iface, kems...); err != nil {
-		fmt.Fprintf(os.Stderr, "unable to connect ephemeral peer, %v\n", err)
+		if err == context.DeadlineExceeded {
+			fmt.Fprintf(os.Stderr, "unable to connect to relay, ensure you are able to connect to 10.64.0.1 on TCP port 1337\n")
+		} else {
+			fmt.Fprintf(os.Stderr, "unable to connect ephemeral peer, %v\n", err)
+		}
 		os.Exit(1)
 	}
 }
