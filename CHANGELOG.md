@@ -19,6 +19,10 @@ Line wrap the file at 100 chars.                                              Th
 * **Fixed**: for any bug fixes.
 * **Security**: in case of vulnerabilities.
 
+## [1.0.4] - 2024-10-01
+### Changed
+- Prevent upgrading an already upgraded tunnel.
+
 
 ## [1.0.3] - 2024-07-04
 ### Changed

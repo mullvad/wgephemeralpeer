@@ -41,6 +41,8 @@ func main() {
 	if err := wgephemeralpeer.Connect(*iface, kems...); err != nil {
 		if err == context.DeadlineExceeded {
 			fmt.Fprintf(os.Stderr, "unable to connect to relay, ensure you are able to connect to 10.64.0.1 on TCP port 1337\n")
+		} else if err == wgephemeralpeer.ErrPeerAlreadyUpgraded {
+			fmt.Fprintf(os.Stderr, "unable to upgrade tunnel, %v\n", err)
 		} else {
 			fmt.Fprintf(os.Stderr, "unable to connect ephemeral peer, %v\n", err)
 		}
