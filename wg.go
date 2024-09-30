@@ -11,6 +11,7 @@ import (
 var (
 	ErrDeviceDoesNotExist   = errors.New("device does not exist")
 	ErrInvalidNumberOfPeers = errors.New("invalid number of peers")
+	ErrPeerAlreadyUpgraded  = errors.New("peer has already been upgraded")
 )
 
 func (ep *ephemeralPeer) getPublicKey(iface string) (*wgtypes.Key, error) {
@@ -26,6 +27,13 @@ func (ep *ephemeralPeer) getPublicKey(iface string) (*wgtypes.Key, error) {
 			return nil, ErrDeviceDoesNotExist
 		}
 		return nil, err
+	}
+
+	var zeroKey wgtypes.Key
+	for _, p := range device.Peers {
+		if p.PresharedKey != zeroKey {
+			return nil, ErrPeerAlreadyUpgraded
+		}
 	}
 
 	publicKey := device.PrivateKey.PublicKey()
