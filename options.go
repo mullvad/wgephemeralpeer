@@ -18,6 +18,14 @@ func WithKyber1024() Option {
 	}
 }
 
+// WithMLKEM1024 uses the key encapsulation method ML-KEM-1024 when negotiating a
+// PSK for the ephemeral peer
+func WithMLKEM1024() Option {
+	return func(ep *ephemeralPeer) {
+		ep.kemSchemes = append(ep.kemSchemes, schemeMLKEM1024)
+	}
+}
+
 // WithDAITA enables DAITA on the ephemeral peer. DAITA hides patterns in the
 // VPN tunnel by generating dummy traffic and using a fixed packet size.
 // However, this is not supported in vanilla WireGuard so enabling this option

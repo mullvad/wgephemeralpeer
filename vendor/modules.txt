@@ -6,6 +6,7 @@ github.com/cloudflare/circl/kem
 github.com/cloudflare/circl/kem/kyber/kyber1024
 github.com/cloudflare/circl/kem/mceliece/internal
 github.com/cloudflare/circl/kem/mceliece/mceliece460896
+github.com/cloudflare/circl/kem/mlkem/mlkem1024
 github.com/cloudflare/circl/math/gf2e12
 github.com/cloudflare/circl/math/gf2e13
 github.com/cloudflare/circl/pke/kyber/internal/common

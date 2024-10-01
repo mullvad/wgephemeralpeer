@@ -6,6 +6,7 @@ import (
 	"github.com/cloudflare/circl/kem"
 	"github.com/cloudflare/circl/kem/kyber/kyber1024"
 	"github.com/cloudflare/circl/kem/mceliece/mceliece460896"
+	"github.com/cloudflare/circl/kem/mlkem/mlkem1024"
 )
 
 var (
@@ -15,6 +16,7 @@ var (
 var (
 	schemeMcEliece460896Round3 kem.Scheme = mceliece460896.Scheme()
 	schemeKyber1024            kem.Scheme = kyber1024.Scheme()
+	schemeMLKEM1024            kem.Scheme = mlkem1024.Scheme()
 )
 
 type pqkem struct {

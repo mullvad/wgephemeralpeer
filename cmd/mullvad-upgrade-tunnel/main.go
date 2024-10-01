@@ -64,6 +64,14 @@ func parseKem(kem string) ([]wgephemeralpeer.Option, error) {
 	case "kyber-cme":
 		k = append(k, wgephemeralpeer.WithKyber1024())
 		k = append(k, wgephemeralpeer.WithMcEliece460896Round3())
+	case "mlkem":
+		k = append(k, wgephemeralpeer.WithMLKEM1024())
+	case "cme-mlkem":
+		k = append(k, wgephemeralpeer.WithMcEliece460896Round3())
+		k = append(k, wgephemeralpeer.WithMLKEM1024())
+	case "mlkem-cme":
+		k = append(k, wgephemeralpeer.WithMLKEM1024())
+		k = append(k, wgephemeralpeer.WithMcEliece460896Round3())
 	default:
 		return nil, fmt.Errorf("unknown kem: %s", kem)
 	}
