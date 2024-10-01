@@ -1,5 +1,5 @@
-# github.com/cloudflare/circl v1.3.7 => github.com/mullvad/circl v0.0.0-20240104174227-83b264e1de1f
-## explicit; go 1.19
+# github.com/cloudflare/circl v1.3.7 => github.com/mullvad/circl v0.0.0-20240930082155-0c072461a157
+## explicit; go 1.21
 github.com/cloudflare/circl/internal/nist
 github.com/cloudflare/circl/internal/sha3
 github.com/cloudflare/circl/kem
@@ -181,4 +181,4 @@ google.golang.org/protobuf/types/known/anypb
 google.golang.org/protobuf/types/known/durationpb
 google.golang.org/protobuf/types/known/timestamppb
 google.golang.org/protobuf/types/pluginpb
-# github.com/cloudflare/circl => github.com/mullvad/circl v0.0.0-20240104174227-83b264e1de1f
+# github.com/cloudflare/circl => github.com/mullvad/circl v0.0.0-20240930082155-0c072461a157
