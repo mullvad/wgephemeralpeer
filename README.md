@@ -1,5 +1,7 @@
 # wgephemeralpeer
 
+**Note for OpenWrt users: For building directly on the device, do a checkout of the revision tagged with `v1.0.4`.**
+
 This repository contains a library that can be used to negotiate ephemeral
 peers in the realm of Mullvad.
 
@@ -80,9 +82,15 @@ and subsequent attempts to establish a tunnel will fail.
 
 By setting the `-kem <kem>` flag, you can use one of the following key
 encapsulation methods when negotiating the preshared key. The default value is
-`cme-kyber`.
+`cme-mlkem`.
 
 - cme (Classic McEliece 460896 Round3)
+- mlkem (ML-KEM-1024)
+- cme-mlkem (Classic McEliece 460896 Round3 + ML-KEM-1024)
+- mlkem-cme (ML-KEM-1024 + Classic McEliece 460896 Round3)
+
+Obsolete methods that are still supported:
+
 - cme-kyber (Classic McEliece 460896 Round3 + Kyber1024)
 - kyber (Kyber1024)
 - kyber-cme (Kyber1024 + Classic McEliece 460896 Round3)
