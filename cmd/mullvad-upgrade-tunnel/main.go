@@ -14,7 +14,7 @@ var VERSION string
 
 func main() {
 	iface := flag.String("wg-interface", "", "wireguard interface")
-	kem := flag.String("kem", "cme-kyber", "key encapsulation methods to use when negotiating psk")
+	kem := flag.String("kem", "cme-mlkem", "key encapsulation methods to use when negotiating psk")
 	version := flag.Bool("version", false, "display version and exit")
 	flag.Parse()
 
