@@ -7,3 +7,5 @@ jobs:
     uses: mullvad/rsw-public/.github/workflows/go-ci.yaml@master
     with:
       go-version: '1.22.5'
+    secrets:
+      SLACK_FAILURE_WEBHOOK_URL: ${{ secrets.SLACK_RSW_BUILDS_URL }}
