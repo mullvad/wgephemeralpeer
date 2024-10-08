@@ -19,7 +19,7 @@ Line wrap the file at 100 chars.                                              Th
 * **Fixed**: for any bug fixes.
 * **Security**: in case of vulnerabilities.
 
-## [Unreleased]
+## [1.0.5] - 2024-10-08
 ### Added
 - Add support for using ML-KEM-1024 in exchange.
 ### Changed
