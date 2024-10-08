@@ -14,7 +14,7 @@ var VERSION string
 
 func main() {
 	iface := flag.String("wg-interface", "", "wireguard interface")
-	kem := flag.String("kem", "cme-kyber", "key encapsulation methods to use when negotiating psk")
+	kem := flag.String("kem", "cme-mlkem", "key encapsulation methods to use when negotiating psk")
 	version := flag.Bool("version", false, "display version and exit")
 	flag.Parse()
 
@@ -63,6 +63,14 @@ func parseKem(kem string) ([]wgephemeralpeer.Option, error) {
 		k = append(k, wgephemeralpeer.WithKyber1024())
 	case "kyber-cme":
 		k = append(k, wgephemeralpeer.WithKyber1024())
+		k = append(k, wgephemeralpeer.WithMcEliece460896Round3())
+	case "mlkem":
+		k = append(k, wgephemeralpeer.WithMLKEM1024())
+	case "cme-mlkem":
+		k = append(k, wgephemeralpeer.WithMcEliece460896Round3())
+		k = append(k, wgephemeralpeer.WithMLKEM1024())
+	case "mlkem-cme":
+		k = append(k, wgephemeralpeer.WithMLKEM1024())
 		k = append(k, wgephemeralpeer.WithMcEliece460896Round3())
 	default:
 		return nil, fmt.Errorf("unknown kem: %s", kem)
