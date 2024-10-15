@@ -2,23 +2,27 @@ package wgephemeralpeer
 
 import (
 	"errors"
+	"net/netip"
 
 	"github.com/cloudflare/circl/kem"
 	"golang.zx2c4.com/wireguard/wgctrl/wgtypes"
 )
 
 var (
-	ErrMissingKEMs = errors.New("missing KEMs")
+	ErrMissingKEMs    = errors.New("missing KEMs")
+	DefaultAPIAddress = netip.AddrPortFrom(
+		netip.AddrFrom4([4]byte{10, 64, 0, 1}), 1337)
 )
 
 type ephemeralPeer struct {
 	daita      bool
 	kemSchemes []kem.Scheme
 	kems       []pqkem
+	apiAddress netip.AddrPort
 }
 
 func newEP(opts ...Option) (*ephemeralPeer, error) {
-	ep := &ephemeralPeer{}
+	ep := &ephemeralPeer{apiAddress: DefaultAPIAddress}
 
 	for _, opt := range opts {
 		opt(ep)

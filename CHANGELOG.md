@@ -19,6 +19,12 @@ Line wrap the file at 100 chars.                                              Th
 * **Fixed**: for any bug fixes.
 * **Security**: in case of vulnerabilities.
 
+
+## [Unreleased]
+### Added
+- Add `api-address` flag to configure the address used to connect to the gRPC API.
+
+
 ## [1.0.5] - 2024-10-08
 ### Added
 - Add support for using ML-KEM-1024 in exchange.

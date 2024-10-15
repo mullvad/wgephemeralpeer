@@ -4,6 +4,7 @@ import (
 	"context"
 	"flag"
 	"fmt"
+	"net/netip"
 	"os"
 	"runtime"
 
@@ -16,6 +17,7 @@ func main() {
 	iface := flag.String("wg-interface", "", "wireguard interface")
 	kem := flag.String("kem", "cme-mlkem", "key encapsulation methods to use when negotiating psk")
 	version := flag.Bool("version", false, "display version and exit")
+	apiAddr := flag.String("api-address", wgephemeralpeer.DefaultAPIAddress.String(), "the address used to connect to the gRPC API")
 	flag.Parse()
 
 	if *version {
@@ -32,15 +34,22 @@ func main() {
 		os.Exit(1)
 	}
 
-	kems, err := parseKem(*kem)
+	options, err := parseKem(*kem)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "unable to parse kem, %v\n", err)
 		os.Exit(1)
 	}
 
-	if err := wgephemeralpeer.Connect(*iface, kems...); err != nil {
+	ap, err := netip.ParseAddrPort(*apiAddr)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "unable to parse api-address, %v\n", err)
+		os.Exit(1)
+	}
+	options = append(options, wgephemeralpeer.WithAPIAddress(ap))
+
+	if err := wgephemeralpeer.Connect(*iface, options...); err != nil {
 		if err == context.DeadlineExceeded {
-			fmt.Fprintf(os.Stderr, "unable to connect to relay, ensure you are able to connect to 10.64.0.1 on TCP port 1337\n")
+			fmt.Fprintf(os.Stderr, "unable to connect to relay, ensure you are able to connect to %v over TCP\n", ap)
 		} else if err == wgephemeralpeer.ErrPeerAlreadyUpgraded {
 			fmt.Fprintf(os.Stderr, "unable to upgrade tunnel, %v\n", err)
 		} else {
