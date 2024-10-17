@@ -16,15 +16,13 @@ var (
 	ErrMissingPostQuantumResponse = errors.New("missing post quantum response")
 )
 
-const grpcAddress = "10.64.0.1:1337"
-
 func (ep *ephemeralPeer) register(publicKey, ephemeralPublicKey *wgtypes.Key) (*wgtypes.Key, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*10)
 	defer cancel()
 
 	conn, err := ggrpc.DialContext(
 		ctx,
-		grpcAddress,
+		ep.apiAddress.String(),
 		ggrpc.WithTransportCredentials(insecure.NewCredentials()),
 		ggrpc.WithBlock(),
 	)

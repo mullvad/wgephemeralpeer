@@ -1,5 +1,7 @@
 package wgephemeralpeer
 
+import "net/netip"
+
 type Option func(*ephemeralPeer)
 
 // WithMcEliece460896Round3 uses the key encapsulation method
@@ -33,5 +35,12 @@ func WithMLKEM1024() Option {
 func WithDAITA(enabled bool) Option {
 	return func(ep *ephemeralPeer) {
 		ep.daita = enabled
+	}
+}
+
+// WithAPIAddress sets the address used to connect to the gRPC API.
+func WithAPIAddress(apiAddress netip.AddrPort) Option {
+	return func(ep *ephemeralPeer) {
+		ep.apiAddress = apiAddress
 	}
 }
