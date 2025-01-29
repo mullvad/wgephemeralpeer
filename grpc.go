@@ -68,10 +68,6 @@ func (ep *ephemeralPeer) getRegisterRequest(publicKey, ephemeralPublicKey *wgtyp
 		req.PostQuantum = ep.getRegisterPQRequest()
 	}
 
-	if ep.daita {
-		req.Daita = &ephemeralpeer.DaitaRequestV1{ActivateDaita: true}
-	}
-
 	return &req
 }
 

@@ -15,7 +15,6 @@ var (
 )
 
 type ephemeralPeer struct {
-	daita      bool
 	kemSchemes []kem.Scheme
 	kems       []pqkem
 	apiAddress netip.AddrPort
