@@ -20,6 +20,8 @@ github.com/mikioh/ipaddr v0.0.0-20190404000644-d465c8ab6721 h1:RlZweED6sbSArvlE9
 github.com/mikioh/ipaddr v0.0.0-20190404000644-d465c8ab6721/go.mod h1:Ickgr2WtCLZ2MDGd4Gr0geeCH5HybhRJbonOgQpvSxc=
 github.com/mullvad/circl v0.0.0-20240930082155-0c072461a157 h1:onkvLt87R9LmLAgvc/u+vf4/f2mTOgMd5UAGN3rxEzc=
 github.com/mullvad/circl v0.0.0-20240930082155-0c072461a157/go.mod h1:PDRU+oXvdD7KCtgKxW95M5Z8BpSCJXQORiZFnBQS5QU=
+github.com/mullvad/rsw-proto/ephemeralpeer v0.0.0-20250129161004-22e2b2ff31b3 h1:0bGWsQ9/uNwABeNLOSGVr0CRn4YIAqRBuWkx3QV9oMU=
+github.com/mullvad/rsw-proto/ephemeralpeer v0.0.0-20250129161004-22e2b2ff31b3/go.mod h1:LVTjwlORzA7ske9rAk4cvomkoZViFMYwGdX5n6Jl4Jc=
 go.opentelemetry.io/otel v1.32.0 h1:WnBN+Xjcteh0zdk01SVqV55d/m62NJLJdIyb4y/WO5U=
 go.opentelemetry.io/otel v1.32.0/go.mod h1:00DCVSB0RQcnzlwyTfqtxSm+DRr9hpYrHjNGiBHVQIg=
 go.opentelemetry.io/otel/metric v1.32.0 h1:xV2umtmNcThh2/a/aCP+h64Xx5wsj8qqnkYZktzNa0M=
