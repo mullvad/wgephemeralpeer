@@ -23,6 +23,10 @@ Line wrap the file at 100 chars.                                              Th
 ## [Unreleased]
 ### Added
 - Add `api-address` flag to configure the address used to connect to the gRPC API.
+### Changed
+- Use Go 1.23.5 for release builds.
+### Security
+- Update third-party dependencies.
 
 
 ## [1.0.5] - 2024-10-08
