@@ -3,5 +3,3 @@ on: push
 jobs:
   ci:
     uses: mullvad/rsw-public/.github/workflows/go-ci.yaml@master
-    with:
-      go-version: '1.22.5'
