@@ -9,6 +9,7 @@ import (
 	"runtime"
 
 	"github.com/mullvad/wgephemeralpeer"
+	"github.com/mullvad/wgephemeralpeer/internal/args"
 )
 
 var VERSION string
@@ -34,7 +35,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	options, err := parseKem(*kem)
+	options, err := args.ParseKem(*kem)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "unable to parse kem, %v\n", err)
 		os.Exit(1)
@@ -57,33 +58,4 @@ func main() {
 		}
 		os.Exit(1)
 	}
-}
-
-func parseKem(kem string) ([]wgephemeralpeer.Option, error) {
-	var k []wgephemeralpeer.Option
-
-	switch kem {
-	case "cme":
-		k = append(k, wgephemeralpeer.WithMcEliece460896Round3())
-	case "kyber":
-		k = append(k, wgephemeralpeer.WithKyber1024())
-	case "cme-kyber":
-		k = append(k, wgephemeralpeer.WithMcEliece460896Round3())
-		k = append(k, wgephemeralpeer.WithKyber1024())
-	case "kyber-cme":
-		k = append(k, wgephemeralpeer.WithKyber1024())
-		k = append(k, wgephemeralpeer.WithMcEliece460896Round3())
-	case "mlkem":
-		k = append(k, wgephemeralpeer.WithMLKEM1024())
-	case "cme-mlkem":
-		k = append(k, wgephemeralpeer.WithMcEliece460896Round3())
-		k = append(k, wgephemeralpeer.WithMLKEM1024())
-	case "mlkem-cme":
-		k = append(k, wgephemeralpeer.WithMLKEM1024())
-		k = append(k, wgephemeralpeer.WithMcEliece460896Round3())
-	default:
-		return nil, fmt.Errorf("unknown kem: %s", kem)
-	}
-
-	return k, nil
 }
