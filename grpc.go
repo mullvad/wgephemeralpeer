@@ -20,11 +20,9 @@ func (ep *ephemeralPeer) register(publicKey, ephemeralPublicKey *wgtypes.Key) (*
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*10)
 	defer cancel()
 
-	conn, err := ggrpc.DialContext(
-		ctx,
+	conn, err := ggrpc.NewClient(
 		ep.apiAddress.String(),
 		ggrpc.WithTransportCredentials(insecure.NewCredentials()),
-		ggrpc.WithBlock(),
 	)
 	if err != nil {
 		return nil, err
