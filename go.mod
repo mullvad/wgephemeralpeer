@@ -6,6 +6,7 @@ replace github.com/cloudflare/circl => github.com/mullvad/circl v0.0.0-202409300
 
 require (
 	github.com/cloudflare/circl v1.3.7
+	github.com/mullvad/rsw-proto/ephemeralpeer v0.0.0-20250129161004-22e2b2ff31b3
 	golang.zx2c4.com/wireguard/wgctrl v0.0.0-20241231184526-a9ab2273dd10
 	google.golang.org/grpc v1.70.0
 	google.golang.org/grpc/cmd/protoc-gen-go-grpc v1.5.1

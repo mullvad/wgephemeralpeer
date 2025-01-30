@@ -6,10 +6,10 @@ import (
 	"time"
 
 	"golang.zx2c4.com/wireguard/wgctrl/wgtypes"
-	ggrpc "google.golang.org/grpc"
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 
-	"github.com/mullvad/wgephemeralpeer/internal/grpc"
+	"github.com/mullvad/rsw-proto/ephemeralpeer"
 )
 
 var (
@@ -20,16 +20,16 @@ func (ep *ephemeralPeer) register(publicKey, ephemeralPublicKey *wgtypes.Key) (*
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*10)
 	defer cancel()
 
-	conn, err := ggrpc.NewClient(
+	conn, err := grpc.NewClient(
 		ep.apiAddress.String(),
-		ggrpc.WithTransportCredentials(insecure.NewCredentials()),
+		grpc.WithTransportCredentials(insecure.NewCredentials()),
 	)
 	if err != nil {
 		return nil, err
 	}
 	defer conn.Close()
 
-	c := grpc.NewEphemeralPeerClient(conn)
+	c := ephemeralpeer.NewEphemeralPeerClient(conn)
 
 	req := ep.getRegisterRequest(publicKey, ephemeralPublicKey)
 	resp, err := c.RegisterPeerV1(ctx, req)
@@ -58,8 +58,8 @@ func (ep *ephemeralPeer) register(publicKey, ephemeralPublicKey *wgtypes.Key) (*
 	return nil, nil
 }
 
-func (ep *ephemeralPeer) getRegisterRequest(publicKey, ephemeralPublicKey *wgtypes.Key) *grpc.EphemeralPeerRequestV1 {
-	req := grpc.EphemeralPeerRequestV1{
+func (ep *ephemeralPeer) getRegisterRequest(publicKey, ephemeralPublicKey *wgtypes.Key) *ephemeralpeer.EphemeralPeerRequestV1 {
+	req := ephemeralpeer.EphemeralPeerRequestV1{
 		WgParentPubkey:        publicKey[:],
 		WgEphemeralPeerPubkey: ephemeralPublicKey[:],
 	}
@@ -68,24 +68,20 @@ func (ep *ephemeralPeer) getRegisterRequest(publicKey, ephemeralPublicKey *wgtyp
 		req.PostQuantum = ep.getRegisterPQRequest()
 	}
 
-	if ep.daita {
-		req.Daita = &grpc.DaitaRequestV1{ActivateDaita: true}
-	}
-
 	return &req
 }
 
-func (ep *ephemeralPeer) getRegisterPQRequest() *grpc.PostQuantumRequestV1 {
-	var kp []*grpc.KemPubkeyV1
+func (ep *ephemeralPeer) getRegisterPQRequest() *ephemeralpeer.PostQuantumRequestV1 {
+	var kp []*ephemeralpeer.KemPubkeyV1
 
 	for _, k := range ep.kems {
-		kp = append(kp, &grpc.KemPubkeyV1{
+		kp = append(kp, &ephemeralpeer.KemPubkeyV1{
 			AlgorithmName: getAlgorithmName(k.scheme.Name()),
 			KeyData:       k.publicKey,
 		})
 	}
 
-	return &grpc.PostQuantumRequestV1{KemPubkeys: kp}
+	return &ephemeralpeer.PostQuantumRequestV1{KemPubkeys: kp}
 }
 
 func getAlgorithmName(name string) string {

@@ -34,6 +34,9 @@ github.com/mdlayher/netlink/nlenc
 # github.com/mdlayher/socket v0.5.1
 ## explicit; go 1.20
 github.com/mdlayher/socket
+# github.com/mullvad/rsw-proto/ephemeralpeer v0.0.0-20250129161004-22e2b2ff31b3
+## explicit; go 1.23.5
+github.com/mullvad/rsw-proto/ephemeralpeer
 # golang.org/x/crypto v0.32.0
 ## explicit; go 1.20
 golang.org/x/crypto/curve25519
