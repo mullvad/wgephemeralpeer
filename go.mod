@@ -1,6 +1,6 @@
 module github.com/mullvad/wgephemeralpeer
 
-go 1.23.5
+go 1.23.6
 
 replace github.com/cloudflare/circl => github.com/mullvad/circl v0.0.0-20240930082155-0c072461a157
 
