@@ -20,6 +20,11 @@ Line wrap the file at 100 chars.                                              Th
 * **Security**: in case of vulnerabilities.
 
 
+## [Unreleased]
+### Changed
+- Use Go 1.23.6
+
+
 ## [1.0.6] - 2025-02-03
 ### Added
 - Add `api-address` flag to configure the address used to connect to the gRPC API.
