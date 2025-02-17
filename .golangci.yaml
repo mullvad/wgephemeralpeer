@@ -17,7 +17,6 @@ linters-settings:
     ignore-generated-header: false
     severity: warning
     confidence: 0.8
-    disable-all: true
     rules:
       - name: blank-imports
       - name: context-as-argument
