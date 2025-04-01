@@ -12,7 +12,7 @@ all: ${BIN}
 
 .PHONY: ${BIN}
 ${BIN}:
-	go build -a -trimpath -buildvcs=true -ldflags "${GO_LDFLAGS}" \
+	go build -trimpath -buildvcs=true -ldflags "${GO_LDFLAGS}" \
 		-o ${BIN} ./cmd/mullvad-upgrade-tunnel
 
 .PHONY: install
