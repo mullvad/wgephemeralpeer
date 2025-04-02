@@ -1,17 +1,18 @@
 export CGO_ENABLED = 0
 export VERSION     = ${shell git describe --tags 2>/dev/null}
+export SOURCE_DATE_EPOCH = ${shell git log ${VERSION} -1 --pretty=%ct}
 export SOURCE_DATE_ISO = ${shell TZ=UTC git log ${VERSION} -1 --date=iso-local --pretty=%cd}
 
 
 BIN        = mullvad-upgrade-tunnel
-GO_LDFLAGS = -buildid= -s -w -X main.VERSION=${VERSION}
+GO_LDFLAGS = -buildid= -s -w -X main.VERSION=${VERSION} -X main.buildTimestamp=${SOURCE_DATE_EPOCH}
 
 .PHONY: all
 all: ${BIN}
 
 .PHONY: ${BIN}
 ${BIN}:
-	go build -a -trimpath -buildvcs=false -ldflags "${GO_LDFLAGS}" \
+	go build -trimpath -buildvcs=true -ldflags "${GO_LDFLAGS}" \
 		-o ${BIN} ./cmd/mullvad-upgrade-tunnel
 
 .PHONY: install
