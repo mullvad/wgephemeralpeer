@@ -1,7 +1,7 @@
 FROM ubuntu:22.04 AS build
 
-ENV GO_FILENAME=go1.24.2.linux-amd64.tar.gz
-ENV GO_FILEHASH=68097bd680839cbc9d464a0edce4f7c333975e27a90246890e9f1078c7e702ad
+ENV GO_FILENAME=go1.24.4.linux-amd64.tar.gz
+ENV GO_FILEHASH=77e5da33bb72aeaef1ba4418b6fe511bc4d041873cbf82e5aa6318740df98717
 ENV PATH="$PATH:/usr/local/go/bin:/root/go/bin"
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
