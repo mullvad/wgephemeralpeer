@@ -1,8 +1,8 @@
-name: Master Change
+name: Release
 on:
   push:
-    branches:
-      - master
+    tags:
+      - '**'
 jobs:
   debsum:
     uses: mullvad/rsw-public/.github/workflows/go-debsum.yaml@master
