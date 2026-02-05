@@ -1,4 +1,4 @@
-FROM ubuntu:24.04 AS build
+FROM ubuntu:noble-20260113 AS build
 
 ENV PATH="$PATH:/usr/local/go/bin:/root/go/bin"
 
@@ -10,8 +10,13 @@ ENV GO_FILEHASH=bddf8e653c82429aea7aec2520774e79925d4bb929fe20e67ecc00dd5af44c50
 ENV GOCI_URL=https://github.com/golangci/golangci-lint/releases/download/v1.64.8/golangci-lint-1.64.8-linux-amd64.deb
 ENV GOCI_FILEHASH=3d662a0aaa8fc64babef2bbc4f3f24fd1a073c82c6b8ea2f21c7e40492ea13ca
 
+ENV APT_SNAPSHOT=20260205T000000Z
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
+  && echo "APT::Snapshot ${APT_SNAPSHOT};" | tee /etc/apt/apt.conf.d/50snapshot \
+  && apt-get clean \
+  && apt-get update && apt-get install -y --no-install-recommends \
     curl \
     git \
     make \
