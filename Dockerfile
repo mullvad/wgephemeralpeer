@@ -1,3 +1,8 @@
+FROM ubuntu:noble-20260113 AS cert
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ca-certificates
+
 FROM ubuntu:noble-20260113 AS build
 
 ENV PATH="$PATH:/usr/local/go/bin:/root/go/bin"
@@ -12,10 +17,9 @@ ENV GOCI_FILEHASH=8aa9b3aa14f39745eeb7fc7ff50bcac683e785397d1e4bc9afd2184b12c4ce
 
 ENV APT_SNAPSHOT=20260205T000000Z
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    ca-certificates \
-  && echo "APT::Snapshot ${APT_SNAPSHOT};" | tee /etc/apt/apt.conf.d/50snapshot \
-  && apt-get clean \
+COPY --from=cert /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
+
+RUN echo "APT::Snapshot ${APT_SNAPSHOT};" | tee /etc/apt/apt.conf.d/50snapshot \
   && apt-get update && apt-get install -y --no-install-recommends \
     curl \
     git \
