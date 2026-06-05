@@ -9,8 +9,8 @@ ENV PATH="$PATH:/usr/local/go/bin:/root/go/bin"
 
 # The SHA256 checksum used to verify the go archive can be found at https://go.dev/dl/
 
-ENV GO_FILENAME=go1.25.10.linux-amd64.tar.gz
-ENV GO_FILEHASH=42d4f7a32316aa66591eca7e89867256057a4264451aca10570a715b3637ba70
+ENV GO_FILENAME=go1.25.11.linux-amd64.tar.gz
+ENV GO_FILEHASH=34f14304e856893f4ba30c2cacfe93906e9de7915c5f6aaaf3a81cdccd7ba30b
 
 ENV GOCI_URL=https://github.com/golangci/golangci-lint/releases/download/v2.10.1/golangci-lint-2.10.1-linux-amd64.deb
 ENV GOCI_FILEHASH=8aa9b3aa14f39745eeb7fc7ff50bcac683e785397d1e4bc9afd2184b12c4ce86
