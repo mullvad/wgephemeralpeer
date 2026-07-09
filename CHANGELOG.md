@@ -22,7 +22,7 @@ Line wrap the file at 100 chars.                                              Th
 
 ## [Unreleased]
 ### Security
-- Use Go 1.25.11
+- Use Go 1.25.12
 
 
 ## [1.0.6] - 2025-02-03
