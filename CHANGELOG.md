@@ -24,7 +24,7 @@ Line wrap the file at 100 chars.                                              Th
 ### Security
 - Use Go 1.25.12
 - Update CIRCL dependency.
-
+- Update gRPC dependency.
 
 ## [1.0.6] - 2025-02-03
 ### Added
